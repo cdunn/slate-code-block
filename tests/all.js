@@ -1,52 +1,48 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-import expect from 'expect';
-import fs from 'fs';
-import path from 'path';
-import Slate from 'slate';
-import hyperprint from 'slate-hyperprint';
-import EditCode from '../lib';
+import expect from 'expect'
+import fs from 'fs'
+import path from 'path'
+import Slate from 'slate'
+import hyperprint from '@zarv1k/slate-hyperprint'
+import EditCode from '../lib'
 
-const PLUGIN = EditCode();
+const PLUGIN = EditCode()
 
 function deserializeValue(value) {
-    return new Slate.Editor({
-      plugins: [PLUGIN],
-      value: Slate.Value.fromJSON(
-        {
-          selection: value.selection,
-          document: value.document,
-        }
-      )
-    });
+  return new Slate.Editor({
+    plugins: [PLUGIN],
+    value: Slate.Value.fromJSON({
+      selection: value.selection,
+      document: value.document,
+    }),
+  })
 }
 
 describe('slate-edit-code', () => {
-    const tests = fs.readdirSync(__dirname);
+  const tests = fs.readdirSync(__dirname)
 
-    tests.forEach(test => {
-        if (test[0] === '.' || path.extname(test).length > 0) return;
+  tests.forEach((test) => {
+    if (test[0] === '.' || path.extname(test).length > 0) return
 
-        it(test, () => {
-            Slate.KeyUtils.resetGenerator();
-            const dir = path.resolve(__dirname, test);
-            const input = require(path.resolve(dir, 'input.js')).default;
-            const expectedPath = path.resolve(dir, 'expected.js');
-            const expected =
-                fs.existsSync(expectedPath) && require(expectedPath).default;
+    it(test, () => {
+      Slate.KeyUtils.resetGenerator()
+      const dir = path.resolve(__dirname, test)
+      const input = require(path.resolve(dir, 'input.js')).default
+      const expectedPath = path.resolve(dir, 'expected.js')
+      const expected =
+        fs.existsSync(expectedPath) && require(expectedPath).default
 
-            const runChange = require(path.resolve(dir, 'change.js')).default;
+      const runChange = require(path.resolve(dir, 'change.js')).default
 
-            const newChange = runChange(PLUGIN, deserializeValue(input));
+      const newChange = runChange(PLUGIN, deserializeValue(input))
 
-            if (expected) {
-                const newDoc = hyperprint(newChange.value.document, {
-                    strict: true
-                });
-                expect(newDoc).toEqual(
-                    hyperprint(expected.document, { strict: true })
-                );
-            }
-        });
-    });
-});
+      if (expected) {
+        const newDoc = hyperprint(newChange.value.document, {
+          strict: true,
+        })
+        expect(newDoc).toEqual(hyperprint(expected.document, { strict: true }))
+      }
+    })
+  })
+})

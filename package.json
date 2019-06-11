@@ -14,11 +14,12 @@
   },
   "peerDependencies": {
     "immutable": "^3.8.2",
-    "slate": "^0.44.0",
-    "slate-react": "^0.20.0",
+    "slate": "^0.47.3",
+    "slate-react": "^0.22.4",
     "slate-schema-violations": "^0.1.39"
   },
   "devDependencies": {
+    "@zarv1k/slate-hyperprint": "^3.0.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
@@ -39,12 +40,11 @@
     "immutable": "^3.8.1",
     "mocha": "^3.0.1",
     "prettier": "^1.13.3",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "slate": "^0.44.0",
-    "slate-hyperprint": "^2.2.4",
-    "slate-hyperscript": "^0.11.0",
-    "slate-react": "^0.20.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "slate": "^0.47.4",
+    "slate-hyperscript": "^0.13.3",
+    "slate-react": "^0.22.4",
     "slate-schema-violations": "^0.1.39"
   },
   "scripts": {
