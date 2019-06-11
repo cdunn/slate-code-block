@@ -6,11 +6,11 @@ export default (
         <document>
             <code_block>
                 <code_line>
-                    {'    '}
+                    {'  '}
                     Line 1
                 </code_line>
                 <code_line>
-                    {'    '}
+                    {'  '}
                     Line 2
                 </code_line>
                 <code_line>Line 3</code_line>
